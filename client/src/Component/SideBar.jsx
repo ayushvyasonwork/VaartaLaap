@@ -199,7 +199,9 @@ const SideBar = () => {
                         <div
                             key={index}
                             className={`chat-container ${lightTheme ? "" : "dark"}`}
-                            onClick={() => navigate(`chat/${conversation._id}&${chatName}`)}
+                            // onClick={() => navigate(`chat/${conversation._id}&${chatName}`)}
+                            onClick={() => navigate(`chat/${conversation._id}&${encodeURIComponent(chatName)}`)}
+
                         >
                             <p className={`chat-icon ${lightTheme ? "" : "dark"}`}>{chatName?.[0]}</p>
                             <p className={`chat-title ${lightTheme ? "" : "dark"}`}>{chatName}</p>

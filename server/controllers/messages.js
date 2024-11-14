@@ -1,26 +1,40 @@
 const Message=require('../models/messageModel');
 const Chat=require('../models/chatSchema');
 const User=require('../models/User');
+const mongoose = require('mongoose');
+
 
 const allMessages = async (req, res) => {
     try {
-        const chatId = req.params.chatId;
-        console.log(`Fetching messages for chatId: ${chatId}`)
+        
+        
+        // Get chatId from the params and trim any extra spaces
+        const chatId = req.params.chatId.trim();
 
+        console.log(`Fetching messages for chatId: ${chatId}`);
+
+        // Check if the chatId is a valid ObjectId
+        if (!mongoose.Types.ObjectId.isValid(chatId)) {
+            return res.status(400).json({ success: false, message: 'Invalid chatId' });
+        }
+        
+        // Find the message by chatId
         const messages = await Message.find({ chat: chatId })
-            .populate('sender', 'name pic email') 
-            .populate('chat'); 
-
+            .populate('sender', 'name email')  // Populate sender details
+            .populate('chat')
+            .populate('content');  // Populate chat details
+        // Check if messages exist for the given chatId
         if (!messages) {
             return res.status(404).json({ success: true, message: 'No messages found', messages: [] });
         }
-
         console.log("Found messages:", messages);
-
+        
+        // Send the response with populated messages
         res.status(200).json({
             success: true,
-            messages
+            messages: messages || []  // Return messages (empty array if none found)
         });
+
     } catch (error) {
         console.error("Error fetching messages:", error);
         res.status(500).json({
@@ -29,6 +43,7 @@ const allMessages = async (req, res) => {
         });
     }
 };
+
 
 const sendMessage = async (req, res) => {
     const { content, chatId } = req.body;

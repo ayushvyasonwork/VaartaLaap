@@ -191,6 +191,7 @@ Main container
 .other-msg-container{
   display: flex;
   justify-content: flex-start;
+  width:fit-content;
 }
 .messageBox{
   background-color:cadetblue;
@@ -555,3 +556,62 @@ Main container
   background-color: #4b5c65;
   color: #f4f5f8;
 } */
+/* Chat Container */
+.chat-container1 {
+  display: flex; /* Change from grid to flex */
+  flex-direction: row; /* Align content horizontally */
+  gap: 10px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 12px;
+  background-color: #fff;
+  align-items: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  word-wrap: break-word; /* Allow words to wrap */
+  max-width: 100%; /* Ensure the container does not overflow */
+}
+
+/* Last Message */
+.chat-lastMessage1 {
+  font-size: 0.9rem;
+  color: #888;
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Break long words to prevent overflow */
+  overflow-wrap: break-word; /* Support older browsers */
+  width: 100%; /* Ensure the message spans across the available space */
+  max-width: calc(100% - 50px); /* Adjust width to avoid overflow */
+}
+
+/* For dark mode */
+.dark .chat-container1 {
+  background-color: #3a4a52;
+}
+/* Self Message Container */
+.self-message-container1 {
+  display: flex;
+  justify-content: flex-end; /* Align the message box to the right */
+  padding: 10px;
+  margin: 5px;
+}
+
+/* Message Box */
+.messageBox1 {
+  background-color: #0078d4; /* Blue background for self-messages */
+  padding: 10px;
+  border-radius: 12px;
+  color: white;
+  max-width: 70%; /* Restrict width to avoid message overflow */
+  word-wrap: break-word; /* Allow words to break and wrap */
+  white-space: normal; /* Ensure text wraps normally */
+}
+
+/* Self Timestamp (optional) */
+.self-timestamp1 {
+  font-size: 0.8rem;
+  color: #ddd;
+  margin-top: 5px;
+  text-align: right;
+}
+

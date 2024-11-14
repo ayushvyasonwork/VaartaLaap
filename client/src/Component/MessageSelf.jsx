@@ -1,15 +1,17 @@
-import React from 'react'
+import React from 'react';
 
-const MessageSelf = () => {
-    var props2={name:"You" , message:"this is sample msg"}
+const MessageSelf = ({ message }) => {
+  // Log the message content to verify it's correctly received
+  console.log(`Message content: ${message.content || message}`);
+
   return (
-    <div className='self-message-container'>
-      <div className='messageBox'>
-        <p>{props2.message}</p>
-        <p className='self-timestamp'>12:00am</p>
+    <div className='self-message-container1'>
+      <div className='messageBox1'>
+        <p>{message.content || message}</p>
+        {/* <p className='self-timestamp'>12:00am</p> */}
       </div>
     </div>
-  )
+  );
 }
 
-export default MessageSelf
+export default MessageSelf;
