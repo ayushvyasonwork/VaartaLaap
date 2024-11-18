@@ -469,24 +469,6 @@ Main container
   color: #aaa;
 }
 
-/* Self and Other Messages */
-/* .self-message-container,
-.other-msg-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 10px;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.messageBox,
-.other-text-content {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-} */
 
 /* Welcome Page */
 .welcome-container {
@@ -589,6 +571,7 @@ Main container
   background-color: #3a4a52;
 }
 /* Self Message Container */
+/* Self Message Container */
 .self-message-container1 {
   display: flex;
   justify-content: flex-end; /* Align the message box to the right */
@@ -607,6 +590,18 @@ Main container
   white-space: normal; /* Ensure text wraps normally */
 }
 
+/* Short messages (do not break) */
+.normal-message {
+  word-wrap: normal;
+  white-space: nowrap;
+}
+
+/* Long messages (apply break) */
+.breakable-message {
+  word-wrap: break-word;
+  white-space: normal; /* Allow breaking for long messages */
+}
+
 /* Self Timestamp (optional) */
 .self-timestamp1 {
   font-size: 0.8rem;
@@ -615,3 +610,30 @@ Main container
   text-align: right;
 }
 
+
+.msg-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+  height: calc(100% - 50px); /* Adjust height as needed */
+  border-radius: 20px;
+  background-color: antiquewhite;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.self-message-container1 {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.messageBox1 {
+  background-color: #0078d4;
+  color: white;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  max-width: 60%;
+  word-wrap: break-word;
+}

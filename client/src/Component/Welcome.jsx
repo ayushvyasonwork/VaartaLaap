@@ -1,7 +1,10 @@
 import React from 'react'
 import logo from '../assets/vaartalaap.png'
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 const Welcome = () => {
+  const lightTheme = useSelector((state) => state.themeKey);
   const userData=JSON.parse(localStorage.getItem("userData"))
   console.log(userData);
   const nav=useNavigate();
@@ -10,7 +13,7 @@ const Welcome = () => {
     nav("/");
   }
   return (
-    <div className='welcome-container'>
+    <div className={`welcome-container ${lightTheme ? "" : "dark1"}`}>
       <img src={logo} alt="Logo" className='welcome-logo'/>
       <p>
         Hi , {userData.data.data.name}

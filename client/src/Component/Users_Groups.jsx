@@ -11,20 +11,17 @@ const Users_Groups = () => {
   const [search, setSearch] = useState("");
   const lightTheme = useSelector((state) => state.themeKey);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-         // Adjust this according to how you store tokens
-         console.log(`token is ${token}`);
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
-        console.log(`config is ${config}`);
         const response = await axios.get(`http://localhost:5000/api/v1/auth/userfind?search=${search}`, config);
-        
         setUsers(response.data.users);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -32,8 +29,25 @@ const Users_Groups = () => {
     };
     fetchUsers();
   }, [search]);
-  console.log(`user length is ${users.length}`)
-   // Re-run the effect when 'search' changes
+
+  // Function to handle user click and initiate or access a chat
+  const handleUserClick = async (userId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.post(`http://localhost:5000/api/v1/chats/${userId}`, {}, config);
+      const chat = response.data.chat;
+
+      // Redirect to the chat page for this user
+      navigate(`/app/chat/${chat._id}`);
+    } catch (error) {
+      console.error("Error initiating chat:", error);
+    }
+  };
 
   return (
     <div className={`list-container ${lightTheme ? "" : "dark"}`}>
@@ -49,13 +63,17 @@ const Users_Groups = () => {
           placeholder='Search'
           className={`searchBar ${lightTheme ? "" : "dark1"}`}
           value={search}
-          onChange={(e) => setSearch(e.target.value)} // Update search query as user types
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
       <div className='ug-list'>
         {users.length > 0 ? (
           users.map((user) => (
-            <div key={user._id} className={`list-item ${lightTheme ? "" : "dark1"}`}>
+            <div
+              key={user._id}
+              className={`list-item ${lightTheme ? "" : "dark1"}`}
+              onClick={() => handleUserClick(user._id)} // Call function on click
+            >
               <p className='chat-icon'>{user.name[0].toUpperCase()}</p>
               <p className='chat-title'>{user.name}</p>
             </div>

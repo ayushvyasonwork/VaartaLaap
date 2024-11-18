@@ -5,6 +5,7 @@ const MessageOthers = ({message}) => {
     // var props1={name:"RandomUser",message:"This is a Smaple chat"}
     const lightTheme = useSelector((state) => state.themeKey);
     console.log(`message is ${message}`);
+    const isShortMsg=message.length<16;
   return (
     <div className={`other-msg-container ${lightTheme ? "" : "dark"}`}>
         <div className={`chat-container1 ${lightTheme ? "" : "dark1"}`}>
@@ -13,12 +14,10 @@ const MessageOthers = ({message}) => {
             </p> */}
             <div className='other-text-content1'>
                 {/* <p className='chat-title'>{props1.name}</p> */}
-                <p className='chat-lastMessage1'>{message}</p>
+                <p className={isShortMsg?'chat-lastMessage':'chat-lastMessage1'}>{message}</p>
                 {/* <p classname='chat-timeStamp'>12:00am</p> */}
             </div>
-
         </div>
-      
     </div>
   )
 }
